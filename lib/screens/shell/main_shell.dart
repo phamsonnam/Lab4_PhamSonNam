@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-/// Khung chính với [BottomNavigationBar] – điều hướng qua [StatefulNavigationShell].
+/// Khung app – BottomNavigationBar cho 3 tab chính của project.
 class MainShell extends StatelessWidget {
   const MainShell({super.key, required this.navigationShell});
 
@@ -16,19 +16,14 @@ class MainShell extends StatelessWidget {
         onDestinationSelected: navigationShell.goBranch,
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'Trang chủ',
+            icon: Icon(Icons.movie_outlined),
+            selectedIcon: Icon(Icons.movie),
+            label: 'Phim',
           ),
           NavigationDestination(
-            icon: Icon(Icons.shopping_bag_outlined),
-            selectedIcon: Icon(Icons.shopping_bag),
-            label: 'Sản phẩm',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.school_outlined),
-            selectedIcon: Icon(Icons.school),
-            label: 'Lab 4',
+            icon: Icon(Icons.explore_outlined),
+            selectedIcon: Icon(Icons.explore),
+            label: 'Khám phá',
           ),
           NavigationDestination(
             icon: Icon(Icons.person_outline),

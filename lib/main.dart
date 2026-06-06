@@ -5,18 +5,18 @@ import 'app_settings.dart';
 import 'router/app_router.dart';
 
 void main() {
-  runApp(const Lab4App());
+  runApp(const MovieApp());
 }
 
-/// Root app: [MaterialApp.router] + theme sáng/tối.
-class Lab4App extends StatefulWidget {
-  const Lab4App({super.key});
+/// App phim thống nhất – Lab 4 (nền) + Lab 5 (navigation) + Lab 6 (responsive).
+class MovieApp extends StatefulWidget {
+  const MovieApp({super.key});
 
   @override
-  State<Lab4App> createState() => _Lab4AppState();
+  State<MovieApp> createState() => _MovieAppState();
 }
 
-class _Lab4AppState extends State<Lab4App> {
+class _MovieAppState extends State<MovieApp> {
   final AppSettings _appSettings = AppSettings();
   late final GoRouter _router = createAppRouter(_appSettings);
 
@@ -26,7 +26,7 @@ class _Lab4AppState extends State<Lab4App> {
       listenable: _appSettings,
       builder: (context, child) {
         return MaterialApp.router(
-          title: 'Lab 4 – Flutter UI Fundamentals',
+          title: 'Movie App – Flutter UI & Navigation',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
@@ -56,3 +56,6 @@ class _Lab4AppState extends State<Lab4App> {
     );
   }
 }
+
+/// Alias giữ tương thích test cũ.
+typedef Lab4App = MovieApp;

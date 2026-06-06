@@ -1,48 +1,70 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:lab4_flutter_ui/main.dart';
 
 void main() {
-  testWidgets('App shows home screen and bottom navigation', (
+  testWidgets('App opens movie list with bottom navigation', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const Lab4App());
+    await tester.pumpWidget(const MovieApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('Trang chủ'), findsWidgets);
-    expect(find.text('Sản phẩm'), findsOneWidget);
-    expect(find.text('Lab 4'), findsOneWidget);
+    expect(find.text('Phim'), findsOneWidget);
+    expect(find.text('Khám phá'), findsOneWidget);
     expect(find.text('Cá nhân'), findsOneWidget);
-    expect(find.text('Chào mừng đến cửa hàng!'), findsOneWidget);
+    expect(find.text('Movies'), findsOneWidget);
+    expect(find.text('Dune: Part Two'), findsOneWidget);
   });
 
-  testWidgets('Products tab shows TabBar categories', (
+  testWidgets('Movie list navigates to detail screen', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const Lab4App());
+    await tester.pumpWidget(const MovieApp());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Sản phẩm'));
+    await tester.tap(find.text('Dune: Part Two'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Tất cả'), findsOneWidget);
-    expect(find.text('Điện tử'), findsWidgets);
-    expect(find.text('Thời trang'), findsWidgets);
-    expect(find.text('Gia dụng'), findsWidgets);
-    expect(find.text('iPhone 15 Pro'), findsOneWidget);
+    expect(find.text('Trailers'), findsOneWidget);
+    expect(find.text('Official Trailer #1'), findsOneWidget);
+    expect(find.text('Favorite'), findsOneWidget);
   });
 
-  testWidgets('Lab tab shows all five exercises', (WidgetTester tester) async {
-    await tester.pumpWidget(const Lab4App());
+  testWidgets('Browse tab filters movies by search', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MovieApp());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Lab 4'));
+    await tester.tap(find.text('Khám phá'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Exercise 1 – Core Widgets Demo'), findsOneWidget);
-    expect(find.text('Exercise 2 – Input Controls Demo'), findsOneWidget);
-    expect(find.text('Exercise 3 – Layout Demo'), findsOneWidget);
-    expect(find.text('Exercise 4 – App Structure & Theme'), findsOneWidget);
-    expect(find.text('Exercise 5 – Common UI Fixes'), findsOneWidget);
+    expect(find.text('Find a Movie'), findsWidgets);
+    expect(find.text('6 movies'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), 'deadpool');
+    await tester.pumpAndSettle();
+
+    expect(find.text('Deadpool & Wolverine'), findsOneWidget);
+    expect(find.text('1 movies'), findsOneWidget);
+  });
+
+  testWidgets('Profile links to UI fundamentals', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MovieApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Cá nhân'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('UI Fundamentals'), findsOneWidget);
+
+    await tester.tap(find.text('UI Fundamentals'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Core Widgets'), findsOneWidget);
+    expect(find.text('Common UI Fixes'), findsOneWidget);
   });
 }
